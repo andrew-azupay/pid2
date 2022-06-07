@@ -9,8 +9,11 @@ export const getServerSideProps = async () => {
   const { secret } = getServerConfig();
   const authsignalServer = new AuthsignalServer({ secret });
 
+  // TODO: replace with real value for your authenticated user
+  const userId = "usr_123";
+
   const { isEnrolled, url } = await authsignalServer.mfa({
-    userId: "usr_123",
+    userId,
     redirectUrl: "http://localhost:3000",
   });
 
