@@ -10,13 +10,13 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   const { secret } = getServerConfig();
   const authsignalServer = new AuthsignalServer({ secret });
 
-  const { state } = await authsignalServer.getAction({
+  const actionResponse = await authsignalServer.getAction({
     action: "withdrawal",
     userId,
     idempotencyKey,
   });
 
-  if (state === UserActionState.CHALLENGE_SUCCEEDED) {
+  if (actionResponse?.state === UserActionState.CHALLENGE_SUCCEEDED) {
     res.redirect("/withdrawal/success");
   } else {
     res.redirect("/withdrawal/failure");

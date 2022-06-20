@@ -11,10 +11,10 @@
     a11y-dialog "^7.4.0"
     uuid "^8.3.2"
 
-"@authsignal/node@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@authsignal/node/-/node-0.0.19.tgz#00d30cd9c099e5b9d01d2f60e618aa6d6831ccfc"
-  integrity sha512-vI94cb7IRNROXL3f1Rzd1kxATSIh9aCIn+Ru+iiZyXqrOc8d1rR/Xu+e+Aid8pVBVxW5cTp/QqoGrMLYEdSkpQ==
+"@authsignal/node@^0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@authsignal/node/-/node-0.0.25.tgz#484c53ef59474e67e7b4544854f80aba361c41e8"
+  integrity sha512-3kfJjryOkjpgaTnU5wCCiOhsPZ9m2ONfYGmJC+cUJc0nihpK29ufoumnbQDXQMeY4kg1/94otkewe2OhSixSsQ==
   dependencies:
     axios "^0.27.2"
 

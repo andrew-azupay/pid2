@@ -16,7 +16,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
     redirectUrl: `http://localhost:3000/finalize-withdrawal?idempotencyKey=${idempotencyKey}`,
   });
 
-  if (state === UserActionState.CHALLENGE_INITIATED && challengeUrl) {
+  if (state === UserActionState.CHALLENGE_REQUIRED && challengeUrl) {
     // Redirect to the Authsignal Prebuilt MFA page to present a challenge
     res.redirect(challengeUrl);
   } else {
