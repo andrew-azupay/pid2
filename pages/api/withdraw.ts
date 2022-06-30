@@ -3,9 +3,8 @@ import { AuthsignalServer, UserActionState } from "@authsignal/node";
 import { getServerConfig } from "../../config";
 
 export default async function handler(_: NextApiRequest, res: NextApiResponse) {
-  // TODO: replace with real values for your authenticated user / idempotency key
+  // TODO: replace with real value for your authenticated user
   const userId = "usr_123";
-  const idempotencyKey = "ik_123";
 
   const { secret } = getServerConfig();
   const authsignalServer = new AuthsignalServer({ secret });
@@ -13,7 +12,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   const { state, challengeUrl } = await authsignalServer.track({
     action: "withdrawal",
     userId,
-    redirectUrl: `http://localhost:3000/finalize-withdrawal?idempotencyKey=${idempotencyKey}`,
+    redirectUrl: "http://localhost:3000/api/finalize-withdrawal",
   });
 
   if (state === UserActionState.CHALLENGE_REQUIRED && challengeUrl) {
