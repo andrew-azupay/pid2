@@ -14,3 +14,36 @@ a {
 * {
   box-sizing: border-box;
 }
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 6px;
+  border: none;
+  background-color: #1d1d1d;
+  color: #fff;
+  padding: 0 15px;
+  height: 40px;
+  margin: 10px 0;
+  transition: background-color 0.15s, color 0.15s;
+}

@@ -1,38 +1,39 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { RedirectTokenPayload } from "@authsignal/node";
 import jwt from "jsonwebtoken";
-import {
-  AuthsignalServer,
-  UserActionState,
-  RedirectTokenPayload,
-} from "@authsignal/node";
-import { getServerConfig } from "../../config";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { authsignal } from "../../lib";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // TODO: replace with real value for your authenticated user
+  // TODO: replace with real value for the authenticated user
   const userId = "usr_123";
 
-  const { secret } = getServerConfig();
-  const authsignalServer = new AuthsignalServer({ secret });
-
   const token = req.query.token as string;
+
+  const secret = process.env.AUTHSIGNAL_SECRET;
+
+  if (!secret) {
+    throw new Error("AUTHSIGNAL_SECRET is not set");
+  }
 
   jwt.verify(token, secret);
 
   const decodedToken = <RedirectTokenPayload>jwt.decode(token);
   const { idempotencyKey } = decodedToken.other;
 
-  const actionResponse = await authsignalServer.getAction({
-    action: "withdrawal",
-    userId,
-    idempotencyKey,
-  });
+  if (idempotencyKey) {
+    const response = await authsignal.getAction({
+      action: "withdrawal",
+      userId,
+      idempotencyKey,
+    });
 
-  if (actionResponse?.state === UserActionState.CHALLENGE_SUCCEEDED) {
-    res.redirect("/withdrawal/success");
-  } else {
-    res.redirect("/withdrawal/failure");
+    if (response?.state === "CHALLENGE_SUCCEEDED") {
+      return res.redirect("/withdrawal/success");
+    }
   }
+
+  res.redirect("/withdrawal/failure");
 }
