@@ -1,7 +1,7 @@
 import { RedirectTokenPayload } from "@authsignal/node";
 import jwt from "jsonwebtoken";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { authsignal } from "../../lib";
+import { authsignal } from "../../lib/authsignal";
 
 export default async function handler(
   req: NextApiRequest,
