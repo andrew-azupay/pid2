@@ -4,7 +4,7 @@ import { authsignal } from "../lib/authsignal";
 
 export const getServerSideProps = async () => {
   // TODO: replace with real value for your authenticated user
-  const userId = "usr_123";
+  const userId = "802514987654321";
 
   const { isEnrolled } = await authsignal.getUser({
     userId,

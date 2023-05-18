@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // TODO: replace with real value for the authenticated user
-  const userId = "usr_123";
+  const userId = "802514987654321";
 
   const token = req.query.token as string;
 
