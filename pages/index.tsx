@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({ isEnrolled }) => {
   return (
     <main>
       <section>
-        <h1>My Example App</h1>
+        <h1>PID2 Auth POC</h1>
         <button
           onClick={async (e) => {
             e.preventDefault();
