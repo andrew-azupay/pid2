@@ -4,7 +4,7 @@ import { authsignal } from "../lib/authsignal";
 
 export const getServerSideProps = async () => {
   // TODO: replace with real value for your authenticated user
-  const userId = "802514987654322";
+  const userId = "802514987654323";
 
   const { isEnrolled } = await authsignal.getUser({
     userId,
@@ -26,6 +26,7 @@ const Home: NextPage<HomeProps> = ({ isEnrolled }) => {
     <main>
       <section>
         <h1>PID2 Auth POC</h1>
+          <input type="text" name="username" autoComplete="username webauthn"/>
         <button
           onClick={async (e) => {
             e.preventDefault();
