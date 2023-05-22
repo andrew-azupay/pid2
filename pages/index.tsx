@@ -25,9 +25,9 @@ export const getServerSideProps = async () => {
 //  const router = useRouter();
 export default function Contact() {
     let asUser = {};
-    const submitContact = async (event) => {
+    const submitContact = async (event: Event) => {
         event.preventDefault();
-        const userId = event.target.username.value;
+        const userId = event.target?.username.value;
         const res = await fetch("/api/checkUser?userId=" + userId, {
             body: JSON.stringify({
                 name: name,
