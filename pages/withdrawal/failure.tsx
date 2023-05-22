@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 const Failure: NextPage = () => {
   return (
     <main>
-      <div>Withdrawal failed!</div>
+      <div>Auth Challenge failed!</div>
     </main>
   );
 };

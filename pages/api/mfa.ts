@@ -3,9 +3,9 @@ import { authsignal } from "../../lib/authsignal";
 
 export default async function mfa(req: NextApiRequest, res: NextApiResponse) {
   // TODO: replace with real value for the authenticated user
-  const userId = "802514987654323";
+  // const userId = "802514987654323";
 
-  const { isEnrolled } = req.body;
+  const { userId, isEnrolled } = req.body;
 
   const { url: mfaUrl } = await authsignal.track({
     action: isEnrolled ? "manageSettings" : "enroll",

@@ -8,8 +8,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // TODO: replace with real value for the authenticated user
-  const userId = "802514987654323";
-
+  // const userId = "802514987654323";
+  const userId = req.query.userId as string;
+  const trackUrl = req.query.trackUrl as string;
   const token = req.query.token as string;
 
   const secret = process.env.AUTHSIGNAL_SECRET;
@@ -25,7 +26,7 @@ export default async function handler(
 
   if (idempotencyKey) {
     const response = await authsignal.getAction({
-      action: "withdrawal",
+      action: trackUrl,
       userId,
       idempotencyKey,
     });
