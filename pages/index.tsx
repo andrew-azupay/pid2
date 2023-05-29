@@ -99,54 +99,24 @@ export default function Contact() {
                     </button>
                     <button
                         onClick={async (e) => {
-                            e.preventDefault();
-
-                            const {state, challengeUrl} = await fetch("/api/withdraw", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({...asUser,
-                                    "trackUrl": "lowRisk2"}),
-                            }).then((res) => res.json());
-                            alert(`Challenge Status: ${state}`);
-                            if (state !== 'ALLOW') {
-                                window.location.href = challengeUrl;
-                            }
+                            const newUrl = await checkAndRedirect(e, "lowRisk2");
+                            window.location.href = newUrl;
                         }}
                     >
                         Low Risk2
                     </button>
                     <button
                         onClick={async (e) => {
-                            e.preventDefault();
-
-                            const {state, challengeUrl} = await fetch("/api/withdraw", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({...asUser,
-                                    "trackUrl": "mediumRisk1"}),
-                            }).then((res) => res.json());
-                            alert(`Challenge Status: ${state}`);
-                            if (state !== 'ALLOW') {
-                                window.location.href = challengeUrl;
-                            }
+                            const newUrl = await checkAndRedirect(e, "mediumRisk1");
+                            window.location.href = newUrl;
                         }}
                     >
                         Medium Risk1
                     </button>
                     <button
                         onClick={async (e) => {
-                            e.preventDefault();
-
-                            const {state, challengeUrl} = await fetch("/api/withdraw", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({...asUser,
-                                    "trackUrl": "mediumRisk2"}),
-                            }).then((res) => res.json());
-                            alert(`Challenge Status: ${state}`);
-                            if (state !== 'ALLOW') {
-                                window.location.href = challengeUrl;
-                            }
+                            const newUrl = await checkAndRedirect(e, "mediumRisk2");
+                            window.location.href = newUrl;
                         }}
                     >
                         Medium Risk2
@@ -171,18 +141,8 @@ export default function Contact() {
                     </button>
                     <button
                         onClick={async (e) => {
-                            e.preventDefault();
-
-                            const {state, challengeUrl} = await fetch("/api/withdraw", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({...asUser,
-                                    "trackUrl": "highRisk2"}),
-                            }).then((res) => res.json());
-                            alert(`Challenge Status: ${state}`);
-                            if (state !== 'ALLOW') {
-                                window.location.href = challengeUrl;
-                            }
+                            const newUrl = await checkAndRedirect(e, "highRisk1");
+                            window.location.href = newUrl;
                         }}
                     >
                         High Risk2
