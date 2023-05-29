@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 const Success: NextPage = () => {
-    const rootUrl = process.env.ROOT_URL?process.env.ROOT_URL:"http://localhost:3000";
+    const rootUrl = "https://pid2.vercel.app";
   return (
     <main>
         <div><h2>Auth Challenge successful!</h2></div>

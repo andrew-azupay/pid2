@@ -14,7 +14,9 @@ export default async function handler(
   const token = req.query.token as string;
 
   const secret = process.env.AUTHSIGNAL_SECRET;
+  const rootUrl = process.env.ROOT_URL;
 
+  const redirectURL = (rootUrl?rootUrl:"http://localhost:3000");
   if (!secret) {
     throw new Error("AUTHSIGNAL_SECRET is not set");
   }
@@ -32,7 +34,7 @@ export default async function handler(
     });
 
     if (response?.state === "CHALLENGE_SUCCEEDED") {
-      return res.redirect("/withdrawal/success");
+      return res.redirect("/withdrawal/success?redirect="+ redirectURL);
     }
   }
 
