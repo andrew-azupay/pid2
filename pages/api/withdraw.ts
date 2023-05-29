@@ -5,11 +5,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // TODO: replace with real value for the authenticated user
   // const userId = "802514987654323";
   const { userId, isEnrolled, trackUrl } = req.body;
+  const rootUrl = process.env.ROOT_URL;
 
+  const redirectURL = (rootUrl?rootUrl:"http://localhost:3000") + "/api/finalize-withdrawal?userId="+userId+"&trackUrl="+trackUrl;
   const { state, url: challengeUrl } = await authsignal.track({
     action: trackUrl,
     userId,
-    redirectUrl: "http://localhost:3000/api/finalize-withdrawal?userId="+userId+"&trackUrl="+trackUrl,
+    redirectUrl: redirectURL,
   });
 
   if (state !== "CHALLENGE_REQUIRED") {
