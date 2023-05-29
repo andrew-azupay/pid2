@@ -8,12 +8,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const rootUrl = process.env.ROOT_URL;
 
   const redirectURL = (rootUrl?rootUrl:"http://localhost:3000") + "/api/finalize-withdrawal?userId="+userId+"&trackUrl="+trackUrl;
-  const { state, url: challengeUrl } = await authsignal.track({
+  const trackRes = await authsignal.track({
     action: trackUrl,
     userId,
     redirectUrl: redirectURL,
   });
 
+  console.log("TrackRes: ", trackRes);
+  const { state, url: challengeUrl } = trackRes;
   if (state !== "CHALLENGE_REQUIRED") {
     // Proceed with withdrawal...
   }

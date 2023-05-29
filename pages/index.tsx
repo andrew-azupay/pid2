@@ -25,6 +25,7 @@ export const getServerSideProps = async () => {
 //  const router = useRouter();
 export default function Contact() {
     let asUser = {};
+    const rootUrl = process.env.ROOT_URL?process.env.ROOT_URL:"http://localhost:3000";
     // @ts-ignore
     const submitContact = async (event) => {
         event.preventDefault();
@@ -46,6 +47,23 @@ export default function Contact() {
         };
 
     };
+
+    const checkAndRedirect: (e: React.MouseEvent<HTMLButtonElement>, trackUrl: String) => Promise<any> = async (e:React.MouseEvent<HTMLButtonElement>, trackUrl:String) => {
+        e.preventDefault();
+
+        const {state, challengeUrl} = await fetch("/api/withdraw", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({...asUser,
+                "trackUrl": trackUrl}),
+        }).then((res) => res.json());
+        alert(`Challenge Status: ${state}`);
+        if (state !== 'ALLOW') {
+            return challengeUrl;
+        } else {
+            return rootUrl + "/withdrawal/success";
+        }
+    }
 
     return (
         <main>
@@ -73,18 +91,8 @@ export default function Contact() {
                     </button>
                     <button
                         onClick={async (e) => {
-                            e.preventDefault();
-
-                            const {state, challengeUrl} = await fetch("/api/withdraw", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json"},
-                                body: JSON.stringify({...asUser,
-                                "trackUrl": "lowRisk1"}),
-                            }).then((res) => res.json());
-                             alert(`Challenge Status: ${state}`);
-                            if (state !== 'ALLOW') {
-                                window.location.href = challengeUrl;
-                            }
+                            const newUrl = await checkAndRedirect(e, "lowRisk1");
+                            window.location.href = newUrl;
                         }}
                     >
                         Low Risk1
