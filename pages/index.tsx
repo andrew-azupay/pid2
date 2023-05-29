@@ -25,7 +25,7 @@ export const getServerSideProps = async () => {
 //  const router = useRouter();
 export default function Contact() {
     let asUser = {};
-    const rootUrl = process.env.ROOT_URL?process.env.ROOT_URL:"http://localhost:3000";
+    const rootUrl = "https://pid2.vercel.app";
     // @ts-ignore
     const submitContact = async (event) => {
         event.preventDefault();
